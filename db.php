@@ -53,10 +53,11 @@ function env($key, $default = '') {
 }
 
 // Database Credentials from Environment Variables
-$host     = env('DB_HOST', 'localhost');
-$db_name  = env('DB_NAME', 'react_native_db');
-$username = env('DB_USER', 'root');
-$password = env('DB_PASS', '');
+// Supports custom variables (DB_HOST) or Clever Cloud default variables (MYSQL_ADDON_HOST)
+$host     = env('DB_HOST', env('MYSQL_ADDON_HOST', 'localhost'));
+$db_name  = env('DB_NAME', env('MYSQL_ADDON_DB', 'react_native_db'));
+$username = env('DB_USER', env('MYSQL_ADDON_USER', 'root'));
+$password = env('DB_PASS', env('MYSQL_ADDON_PASSWORD', ''));
 $conn     = null;
 
 try {
